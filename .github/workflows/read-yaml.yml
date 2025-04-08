@@ -66,38 +66,38 @@ jobs:
   read-yaml:
     runs-on: ubuntu-latest
     outputs:
-      location: ${{  steps.read_action_js.outputs.location }}
-      namespace: ${{  steps.read_action_js.outputs.namespace }}
-      postfix: ${{  steps.read_action_js.outputs.postfix }}
-      environment: ${{  steps.read_action_js.outputs.environment }}
-      enable_aml_computecluster: ${{  steps.read_action_js.outputs.enable_aml_computecluster }}
-      enable_monitoring: ${{  steps.read_action_js.outputs.enable_monitoring }}
-      resource_group: ${{  steps.read_action_js.outputs.resource_group }}
-      aml_workspace: ${{  steps.read_action_js.outputs.aml_workspace }}
-      container_registry: ${{  steps.read_action_js.outputs.container_registry }}
-      bep: ${{  steps.read_action_js.outputs.bep }}
-      oep: ${{  steps.read_action_js.outputs.oep }}
-      terraform_version: ${{  steps.read_action_js.outputs.terraform_version }}
-      terraform_workingdir: ${{  steps.read_action_js.outputs.terraform_workingdir }}
-      terraform_st_location: ${{  steps.read_action_js.outputs.terraform_st_location }}
-      terraform_st_resource_group: ${{  steps.read_action_js.outputs.terraform_st_resource_group }}
-      terraform_st_storage_account: ${{  steps.read_action_js.outputs.terraform_st_storage_account }}
-      terraform_st_container_name: ${{  steps.read_action_js.outputs.terraform_st_container_name }}
-      terraform_st_key: ${{  steps.read_action_js.outputs.terraform_st_key }}
+      location: ${{ steps.read_action_js.outputs.location }}
+      namespace: ${{ steps.read_action_js.outputs.namespace }}
+      postfix: ${{ steps.read_action_js.outputs.postfix }}
+      environment: ${{ steps.read_action_js.outputs.environment }}
+      enable_aml_computecluster: ${{ steps.read_action_js.outputs.enable_aml_computecluster }}
+      enable_monitoring: ${{ steps.read_action_js.outputs.enable_monitoring }}
+      resource_group: ${{ steps.read_action_js.outputs.resource_group }}
+      aml_workspace: ${{ steps.read_action_js.outputs.aml_workspace }}
+      container_registry: ${{ steps.read_action_js.outputs.container_registry }}
+      bep: ${{ steps.read_action_js.outputs.bep }}
+      oep: ${{ steps.read_action_js.outputs.oep }}
+      terraform_version: ${{ steps.read_action_js.outputs.terraform_version }}
+      terraform_workingdir: ${{ steps.read_action_js.outputs.terraform_workingdir }}
+      terraform_st_location: ${{ steps.read_action_js.outputs.terraform_st_location }}
+      terraform_st_resource_group: ${{ steps.read_action_js.outputs.terraform_st_resource_group }}
+      terraform_st_storage_account: ${{ steps.read_action_js.outputs.terraform_st_storage_account }}
+      terraform_st_container_name: ${{ steps.read_action_js.outputs.terraform_st_container_name }}
+      terraform_st_key: ${{ steps.read_action_js.outputs.terraform_st_key }}
     steps:
       - name: Checking out repo
         uses: actions/checkout@v3
       - name: Read test
-        uses: Azure/mlops-templates/read_yaml_action@main
+        uses: cypriannosek/mlops-templates/.github/workflows/read_yaml_action@main
         id: read_action_js
         with:
           config: ${{ github.workspace }}/${{ inputs.file_name }}
       - name: Echo step output
         run: |
           echo "Reading the following yaml file: ${{ github.workspace }}/${{ inputs.file_name }}" &&
-          echo "AzureML (location): ${{  steps.read_action_js.outputs.location }}" &&
+          echo "AzureML (location): ${{ steps.read_action_js.outputs.location }}" &&
           echo "> Resource group: ${{ steps.read_action_js.outputs.resource_group }}" &&
           echo "> AML workspace: ${{ steps.read_action_js.outputs.aml_workspace }}" &&
           echo "> Container registry: ${{ steps.read_action_js.outputs.container_registry }}" &&
-          echo "BEP: ${{  steps.read_action_js.outputs.bep }}  ${{  steps.read_action_js.outputs.oep }}" &&
-          echo "Terraform: ${{  steps.read_action_js.outputs.terraform_version }}  ${{  steps.read_action_js.outputs.terraform_workingdir }}"; echo "${{  steps.read_action_js.outputs.terraform_st_resource_group }}  ${{  steps.read_action_js.outputs.terraform_st_storage_account }} " echo "${{  steps.read_action_js.outputs.terraform_st_container_name }}  ${{  steps.read_action_js.outputs.terraform_st_key }} "
+          echo "BEP: ${{ steps.read_action_js.outputs.bep }}  ${{ steps.read_action_js.outputs.oep }}" &&
+          echo "Terraform: ${{ steps.read_action_js.outputs.terraform_version }}  ${{ steps.read_action_js.outputs.terraform_workingdir }}"; echo "${{ steps.read_action_js.outputs.terraform_st_resource_group }}  ${{ steps.read_action_js.outputs.terraform_st_storage_account }} " echo "${{ steps.read_action_js.outputs.terraform_st_container_name }}  ${{ steps.read_action_js.outputs.terraform_st_key }} "

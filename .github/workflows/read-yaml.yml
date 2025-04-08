@@ -93,11 +93,4 @@ jobs:
         with:
           config: ${{ github.workspace }}/${{ inputs.file_name }}
       - name: Echo step output
-        run: |
-          echo "Reading the following yaml file: ${{ github.workspace }}/${{ inputs.file_name }}" &&
-          echo "AzureML (location): ${{ steps.read_action_js.outputs.location }}" &&
-          echo "> Resource group: ${{ steps.read_action_js.outputs.resource_group }}" &&
-          echo "> AML workspace: ${{ steps.read_action_js.outputs.aml_workspace }}" &&
-          echo "> Container registry: ${{ steps.read_action_js.outputs.container_registry }}" &&
-          echo "BEP: ${{ steps.read_action_js.outputs.bep }}  ${{ steps.read_action_js.outputs.oep }}" &&
-          echo "Terraform: ${{ steps.read_action_js.outputs.terraform_version }}  ${{ steps.read_action_js.outputs.terraform_workingdir }}"; echo "${{ steps.read_action_js.outputs.terraform_st_resource_group }}  ${{ steps.read_action_js.outputs.terraform_st_storage_account }} " echo "${{ steps.read_action_js.outputs.terraform_st_container_name }}  ${{ steps.read_action_js.outputs.terraform_st_key }} "
+        run: echo "Reading the following yaml file ${{ github.workspace }}/${{ inputs.file_name }}" \nAzureML (location) ${{ steps.read_action_js.outputs.location }} \n> Resource group ${{ steps.read_action_js.outputs.resource_group }} \n> AML workspace ${{ steps.read_action_js.outputs.aml_workspace }} \n> Container registry ${{ steps.read_action_js.outputs.container_registry }} \nBEP ${{ steps.read_action_js.outputs.bep }}  ${{ steps.read_action_js.outputs.oep }} \nTerraform ${{ steps.read_action_js.outputs.terraform_version }}  ${{ steps.read_action_js.outputs.terraform_workingdir }}"; echo "${{ steps.read_action_js.outputs.terraform_st_resource_group }}  ${{ steps.read_action_js.outputs.terraform_st_storage_account }} " echo "${{ steps.read_action_js.outputs.terraform_st_container_name }}  ${{ steps.read_action_js.outputs.terraform_st_key }}"

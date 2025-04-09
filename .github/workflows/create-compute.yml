@@ -37,7 +37,7 @@ jobs:
           creds: ${{secrets.creds}}
           enable-AzPSSession: true 
       - name: install-extension
-        run:  az extension add -n ml -y
+        run:  az extension add -n ml -y --debug
       - name: update-extension
         run: az extension update -n ml
       - name: create-compute-default-tier

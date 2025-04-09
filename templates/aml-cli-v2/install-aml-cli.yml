@@ -12,6 +12,6 @@ steps:
       inlineScript: |
         set -e # fail on error
         az version
-        az extension add -n ml -y
+        az extension add -n ml -y --version 2.35.0
         az extension update -n ml
         az extension list

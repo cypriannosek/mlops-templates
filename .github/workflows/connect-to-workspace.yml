@@ -30,9 +30,7 @@ jobs:
           creds: ${{secrets.creds}}
           enable-AzPSSession: true 
       - name: install-extension
-        run:  az extension add -n ml -y
-      - name: update-extension
-        run: az extension update -n ml
+        run:  az extension add -n ml -y --version 2.35.0
       - name: list-models
         run:  az ml model list --resource-group ${{inputs.resourceGroup}} --workspace-name ${{inputs.workspace}}
         #run: az configure --defaults group=${{inputs.resourceGroup}} workspace=${{inputs.workspace}}

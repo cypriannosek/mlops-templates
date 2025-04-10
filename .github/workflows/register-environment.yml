@@ -36,7 +36,7 @@ jobs:
           enable-AzPSSession: true
       - name: install-extension
         run: az extension add -n ml -y --version 2.35.0
-      - name: list-extentions
+      - name: list-extensions
         run: az extension list
       - name: create-environment-from-file-with-conda
         if: ${{ inputs.conda_file != ''}}

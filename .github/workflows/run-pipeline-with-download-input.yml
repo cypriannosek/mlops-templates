@@ -15,6 +15,10 @@ on:
       job-name:
         required: true
         type: string
+      wait-for-completion:
+        required: false
+        type: boolean
+        default: false
     secrets:
       creds:
         required: true
@@ -55,15 +59,23 @@ jobs:
             echo "Status query failed"
             exit 4
           fi
-          running=("NotStarted" "Queued" "Starting" "Preparing" "Running" "Finalizing" "CancelRequested")
-          while [[ ${running[*]} =~ $status ]]
-          do
-            sleep 15 
-            status=$(az ml job show -n $run_id --resource-group ${{ inputs.resource_group }} --workspace-name ${{ inputs.workspace_name }} --query status -o tsv)
-            echo $status
-          done
-          if [[ "$status" != "Completed" ]]  
+          echo "Job ID: $run_id, waiting for completion: ${WAIT_FOR_COMPLETION}"
+          if [[ "$WAIT_FOR_COMPLETION" == true ]]
           then
-            echo "Training Job failed or canceled"
-            exit 3
+            running=("NotStarted" "Queued" "Starting" "Preparing" "Running" "Finalizing" "CancelRequested")
+            while [[ ${running[*]} =~ $status ]]
+            do
+              sleep 15 
+              status=$(az ml job show -n $run_id --resource-group ${{ inputs.resource_group }} --workspace-name ${{ inputs.workspace_name }} --query status -o tsv)
+              echo $status
+            done
+            if [[ "$status" != "Completed" ]]  
+            then
+              echo "Training Job failed or canceled"
+              exit 3
+            fi
+          else
+            echo "DONE. The job is running in the background."
           fi
+        env:
+          WAIT_FOR_COMPLETION: $${ inputs.wait-for-completion }
